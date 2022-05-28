@@ -129,7 +129,7 @@ _menuEventHandler(menu, item, name, index, menuName) {
         func.call(item, index, menu)
     }
     if (item.callback) {
-        func := IsObject(menu.callback) ? menu.callback : Func(menu.callback)
+        func := IsObject(item.callback) ? item.callback : Func(item.callback)
         func.call(item, index, menu)
     }
 }
