@@ -12,6 +12,8 @@ class __Menu__ {
     
     static _selectedItem
     
+    _groups := []
+    
     __new(menuItems, callback="") {
         static id := 0
         this.name := "menu_" ++ id
@@ -26,7 +28,14 @@ class __Menu__ {
                 sub := Func("_menuEventHandler").bind(&this, item)
             }
             
-            Menu % this.name, Add, -, % sub, % item.options
+            if (item.hasKey("group")) {
+                this._groups[item.group, a_index] := item
+                opts := " Radio"
+            } else {
+                opts := ""
+            }
+            
+            Menu % this.name, Add, -, % sub, % item.options opts
             
             if (item.checked)
                 this.check(a_index "&")
@@ -120,7 +129,17 @@ class __Menu__ {
 _menuEventHandler(menu, item, name, index, menuName) {
     __Menu__._selectedItem := item
     menu := Object(menu)
-    if (item.hasKey("checked")) {
+    if (item.hasKey("group")) {
+        for i, v in menu._groups[item.group] {
+            if (i == index) {
+                v.checked := true
+                menu.check(i "&")
+            } else {
+                v.checked := false
+                menu.uncheck(i "&")
+            }
+        }
+    } else if (item.hasKey("checked")) {
         item.checked := !item.checked
         menu.toggleCheck(index "&")
     }
