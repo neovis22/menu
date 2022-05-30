@@ -118,7 +118,7 @@ Gui Show, w600 h400
 - `checked`
 - `disabled`
 - `color`
-- `radio` 라디오 버튼을 활성화하며 동일한 설정값의 항목을 그룹화
+- `group` 라디오 버튼을 활성화하며 동일한 설정값의 항목을 그룹화
 - `icon` `{file, [number], [width]}`
 - `default`
 - `options` `Menu Add`에서 마지막 매개변수로 입력하는 옵션
